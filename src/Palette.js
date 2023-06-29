@@ -18,10 +18,6 @@ const Palette = ({ colors }) => {
     setData({ ...data, format: e.target.value, open: true });
   };
 
-  const handleOpen = () => {
-    setData({ ...data, open: true });
-  };
-
   const handleClose = () => {
     setData({ ...data, open: false });
   };

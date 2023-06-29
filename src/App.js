@@ -8,7 +8,7 @@ function App() {
   console.log(getPalette(seedColors[4]));
   return (
     <div className="App">
-      <Palette {...seedColors[5]} />
+      <Palette {...getPalette(seedColors[4])} />
     </div>
   );
 }

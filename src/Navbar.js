@@ -1,9 +1,11 @@
 import React from "react";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import "./Navbar.css";
 
-const Navbar = ({ level, changeLevel }) => {
+const Navbar = ({ level, changeLevel, format, changeFormat }) => {
   return (
     <header className="Navbar">
       <div className="logo">
@@ -20,6 +22,13 @@ const Navbar = ({ level, changeLevel }) => {
             onChange={changeLevel}
           />
         </div>
+      </div>
+      <div className="select-container">
+        <Select value={format} onChange={changeFormat}>
+          <MenuItem value="hex"> Hex - #ffffff</MenuItem>
+          <MenuItem value="rgb"> rgb - rgb(255, 255, 255)</MenuItem>
+          <MenuItem value="rgba"> rgba - rgba(255, 255, 255, 1.0)</MenuItem>
+        </Select>
       </div>
     </header>
   );

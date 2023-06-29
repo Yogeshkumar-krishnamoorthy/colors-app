@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import Snackbar from "@mui/material/Snackbar";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+import { getPalette } from "./ColorHelpers";
 import "./Palette.css";
 
-const Palette = ({ colors, paletteName, emoji }) => {
+const Palette = ({ seedColors }) => {
   const [data, setData] = useState({ level: 500, format: "hex", open: false });
-  //   const [level, setLevel] = useState(500);
+
+  const { id } = useParams();
+
+  const { colors, paletteName, emoji } = getPalette(
+    seedColors.find((c) => c?.id === id)
+  );
 
   const handleLevel = (level) => {
     setData({ ...data, level: level });

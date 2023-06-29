@@ -8,31 +8,3 @@
   width: 100%;
   height: 90%;
 }
-
-.slider {
-  width: 340px;
-  margin: 0px 10px;
-  display: inline-block;
-}
-
-.rc-slider-track {
-  background-color: transparent;
-}
-
-.rc-slider-rail {
-  height: 8px;
-}
-
-.rc-slider-handle,
-.rc-slider-handle:hover,
-.rc-slider-handle:active,
-.rc-slider-handle:focus,
-.rc-slider-handle:focus-visible {
-  background-color: #008000;
-  outline: none !important;
-  box-shadow: none !important;
-  border: 2px solid #008000 !important;
-  width: 13px;
-  height: 13px;
-  margin-top: -3px;
-}

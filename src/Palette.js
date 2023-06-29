@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import "./Palette.css";
 
-const Palette = ({ colors }) => {
+const Palette = ({ colors, paletteName, emoji }) => {
   const [data, setData] = useState({ level: 500, format: "hex", open: false });
   //   const [level, setLevel] = useState(500);
 
@@ -32,10 +32,13 @@ const Palette = ({ colors }) => {
       />
       <div className="Palette-Colors">
         {colors[data.level]?.map((c) => (
-          <ColorBox color={c[data.format]} name={c.name} />
+          <ColorBox key={c.id} color={c[data.format]} name={c.name} />
         ))}
       </div>
-      {/* Footer goes here */}
+      <div className="Palette-Footer">
+        {paletteName}
+        <span className="emoji">{emoji}</span>
+      </div>
       <Snackbar
         open={data.open}
         onClose={handleClose}

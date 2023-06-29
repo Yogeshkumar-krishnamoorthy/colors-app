@@ -12,13 +12,15 @@ const Palette = ({ colors }) => {
   };
   return (
     <div className="Palette">
-      <Slider
-        defaultValue={level}
-        step={100}
-        min={100}
-        max={900}
-        onChange={handleLevel}
-      />
+      <div className="slider">
+        <Slider
+          defaultValue={level}
+          step={100}
+          min={100}
+          max={900}
+          onChange={handleLevel}
+        />
+      </div>
       <div className="Palette-Colors">
         {colors[level]?.map((c) => (
           <ColorBox color={c.hex} name={c.name} />

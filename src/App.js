@@ -21,6 +21,11 @@ function App() {
           path="/palette/:id"
           element={<Palette seedColors={seedColors} />}
         />
+        <Route
+          exact
+          path="/palette/:paletteId/:colorName"
+          element={<h1>individual palette</h1>}
+        />
       </Route>
     )
   );

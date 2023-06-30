@@ -53,6 +53,7 @@
   line-height: 30px;
   text-align: center;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .copy-overlay {

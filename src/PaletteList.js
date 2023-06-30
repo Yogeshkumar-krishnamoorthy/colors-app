@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MiniPalette from "./MiniPalette";
 
 const PaletteList = ({ palette }) => {
   return (
     <div className="PaletteList">
+      <MiniPalette />
       <h1 style={{ textAlign: "center" }}>React Palette</h1>
       <div
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}

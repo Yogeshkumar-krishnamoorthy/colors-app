@@ -15,13 +15,13 @@ const PalettesListHeader = styled("h1", {
   name: "palettes-list",
   slot: "header",
 })({
-  maxWidth: 900,
+  maxWidth: 700,
   color: "#000",
-  fontSize: "2.5rem",
+  fontSize: "1.5rem",
   fontWeight: "600",
   textAlign: "center",
-  padding: 10,
-  margin: "0 auto 1rem auto",
+  padding: "10px 0",
+  margin: "0 auto",
   display: "flex",
   justifyContent: "space-between",
 });
@@ -30,16 +30,12 @@ const PalettesContainer = styled("div", {
   name: "palettes",
   slot: "container",
 })({
-  maxWidth: 900,
+  maxWidth: 700,
   margin: "0 auto",
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-between",
   flexWrap: "wrap",
-  gap: 10,
-  "& > *": {
-    width: 280,
-    padding: 10,
-  },
+  gap: 20,
 });
 
 const PaletteList = ({ palette }) => {

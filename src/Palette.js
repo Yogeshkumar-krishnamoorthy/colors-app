@@ -39,7 +39,13 @@ const Palette = ({ seedColors }) => {
       />
       <div className="Palette-Colors">
         {colors[data.level]?.map((c) => (
-          <ColorBox key={c.id} color={c[data.format]} name={c.name} />
+          <ColorBox
+            key={c.id}
+            paletteId={id}
+            id={c.id}
+            color={c[data.format]}
+            name={c.name}
+          />
         ))}
       </div>
       <div className="Palette-Footer">

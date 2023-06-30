@@ -8,7 +8,7 @@ const StyledMiniPalette = styled("div", {
 })({
   position: "relative",
   width: 200,
-  padding: 5,
+  padding: 0,
   backgroundColor: "#fff",
   borderRadius: 5,
 });
@@ -17,10 +17,12 @@ const StyledLink = styled(Link, {
   name: "mini-palette",
   slot: "link",
 })({
+  display: "block",
   width: "100%",
   height: "100%",
   textDecoration: "none",
   color: "#000",
+  padding: 5,
 });
 
 const MiniColorBoxContainer = styled("div", {

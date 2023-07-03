@@ -45,6 +45,7 @@ const Palette = ({ seedColors }) => {
             id={c.id}
             color={c[data.format]}
             name={c.name}
+            more={true}
           />
         ))}
       </div>

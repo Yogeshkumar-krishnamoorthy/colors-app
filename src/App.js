@@ -8,6 +8,7 @@ import {
 import Palette from "./Palette";
 import seedColors from "./seedColors";
 import PaletteList from "./PaletteList";
+import SinglePalette from "./SinglePalette";
 import "./App.css";
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
         />
         <Route
           exact
-          path="/palette/:paletteId/:colorName"
-          element={<h1>individual palette</h1>}
+          path="/palette/:paletteId/:colorId"
+          element={<SinglePalette seedColors={seedColors} />}
         />
       </Route>
     )

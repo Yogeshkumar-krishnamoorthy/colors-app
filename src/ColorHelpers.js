@@ -39,4 +39,12 @@ const getPalette = (starterPalette) => {
   return newPalette;
 };
 
-export { getPalette };
+const getShades = (colors, colorId) => {
+  const shades = [];
+  for (let c in colors) {
+    shades.push(colors[c].find((c) => c.id === colorId));
+  }
+  return shades.slice(1);
+};
+
+export { getPalette, getShades };

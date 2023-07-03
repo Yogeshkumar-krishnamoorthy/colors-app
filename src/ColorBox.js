@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
+import chroma from "chroma-js";
 import "./ColorBox.css";
 
 const ColorBox = ({ paletteId, id, color, name, more = false }) => {
@@ -16,6 +17,9 @@ const ColorBox = ({ paletteId, id, color, name, more = false }) => {
   const handlePropogation = (e) => {
     e.stopPropagation();
   };
+
+  const isDark = chroma(color).luminance() <= 0.2;
+  const isLight = chroma(color).luminance() >= 0.5;
   return (
     <CopyToClipboard text={color} onCopy={handleCopy}>
       <div className="ColorBox" style={{ backgroundColor: color }}>
@@ -25,18 +29,20 @@ const ColorBox = ({ paletteId, id, color, name, more = false }) => {
         />
         <div className={copying ? "copy-message show" : "copy-message"}>
           <h2>Copied!</h2>
-          <p>{color}</p>
+          <p className={isLight && "dark-text"}>{color}</p>
         </div>
         <div className="Copy-Container">
           <div className="box-content">
-            <span>{name}</span>
+            <span className={isDark && "light-text"}>{name}</span>
           </div>
-          <button className="copy-button">copy</button>
+          <button className={isLight ? "copy-button dark-text" : "copy-button"}>
+            copy
+          </button>
           {more && (
             <Link
               to={`/palette/${paletteId}/${id}`}
               onClick={handlePropogation}
-              className="see-more"
+              className={isLight ? "see-more dark-text" : "see-more"}
             >
               more
             </Link>

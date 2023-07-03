@@ -46,6 +46,10 @@
   font-size: 12px;
 }
 
+.box-content .light-text {
+  color: #fff;
+}
+
 .see-more {
   background-color: rgba(255, 255, 255, 0.3);
   position: absolute;
@@ -58,6 +62,10 @@
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
+}
+
+.dark-text {
+  color: #00000080;
 }
 
 .copy-overlay {

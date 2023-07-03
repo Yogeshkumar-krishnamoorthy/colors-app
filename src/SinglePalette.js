@@ -4,6 +4,8 @@ import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { getPalette, getShades } from "./ColorHelpers";
 import Navbar from "./Navbar";
+import SnackBar from "./SnackBar";
+import Footer from "./Footer";
 
 const Main = styled("div", {
   name: "single",
@@ -16,7 +18,7 @@ const ShadesHolder = styled("div", {
   name: "shades",
   slot: "holder",
 })({
-  height: "95vh",
+  height: "90vh",
 });
 
 const ShadesColorBox = styled(ColorBox, {
@@ -38,6 +40,10 @@ const SinglePalette = ({ seedColors }) => {
     setData({ ...data, format: e.target.value, open: true });
   };
 
+  const handleClose = () => {
+    setData({ ...data, open: false });
+  };
+
   useEffect(() => {
     const shades = getShades(colors, colorId);
     setData({ ...data, shades: shades });
@@ -50,7 +56,7 @@ const SinglePalette = ({ seedColors }) => {
       <ShadesHolder>
         {data.shades.map((c) => (
           <ShadesColorBox
-            key={c.id}
+            key={c.name}
             paletteId={paletteId}
             id={c.id}
             color={c[data.format]}
@@ -58,6 +64,12 @@ const SinglePalette = ({ seedColors }) => {
           />
         ))}
       </ShadesHolder>
+      <Footer paletteName={paletteName} emoji={emoji} />
+      <SnackBar
+        open={data.open}
+        handleClose={handleClose}
+        format={data.format}
+      />
     </Main>
   );
 };

@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
-import Snackbar from "@mui/material/Snackbar";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
 import { getPalette } from "./ColorHelpers";
+import SnackBar from "./SnackBar";
+import Footer from "./Footer";
 import "./Palette.css";
 
 const Palette = ({ seedColors }) => {
@@ -49,29 +48,11 @@ const Palette = ({ seedColors }) => {
           />
         ))}
       </div>
-      <div className="Palette-Footer">
-        {paletteName}
-        <span className="emoji">{emoji}</span>
-      </div>
-      <Snackbar
+      <Footer paletteName={paletteName} emoji={emoji} />
+      <SnackBar
         open={data.open}
-        onClose={handleClose}
-        autoHideDuration={1000}
-        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
-        message={<span id="message-id">Format Changed To : {data.format}</span>}
-        ContentProps={{
-          "aria-describedby": "message-id",
-        }}
-        action={[
-          <IconButton
-            onClick={handleClose}
-            color="#fff"
-            key="close"
-            aria-label="close"
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
+        handleClose={handleClose}
+        format={data.format}
       />
     </div>
   );

@@ -8,17 +8,3 @@
   width: 100%;
   height: 90%;
 }
-
-.Palette-Footer {
-  background-color: #fff;
-  height: 4vh;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-weight: bold;
-}
-
-.emoji {
-  font-size: 1rem;
-  margin: 0 1rem;
-}

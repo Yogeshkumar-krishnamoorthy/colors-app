@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ColorBox from "./ColorBox";
 import { styled } from "@mui/system";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getPalette, getShades } from "./ColorHelpers";
 import Navbar from "./Navbar";
 import SnackBar from "./SnackBar";
@@ -26,6 +26,37 @@ const ShadesColorBox = styled(ColorBox, {
   slot: "color-box",
 })({
   height: "50% !important",
+});
+
+const PreviousPage = styled("div", {
+  name: "shades",
+  slot: "color-box",
+})({
+  display: "inline-block",
+  width: "20%",
+  height: "50%",
+  backgroundColor: "#000",
+  marginBottom: "-4px",
+  position: "relative",
+});
+
+const BackButton = styled(Link, {
+  name: "shades",
+  slot: "go-back",
+})({
+  width: 100,
+  height: 30,
+  position: "absolute",
+  inset: "50% auto auto 50%",
+  margin: "-15px auto auto -50px",
+  color: "#fff",
+  textDecoration: "none",
+  textTransform: "uppercase",
+  outline: "none",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "rgba(255, 255, 255, 0.3)",
 });
 
 const SinglePalette = ({ seedColors }) => {
@@ -53,7 +84,7 @@ const SinglePalette = ({ seedColors }) => {
   return (
     <Main>
       <Navbar format={data.format} changeFormat={handleFormat} />
-      <ShadesHolder>
+      <ShadesHolder className="SinglePlatte">
         {data.shades.map((c) => (
           <ShadesColorBox
             key={c.name}
@@ -63,6 +94,9 @@ const SinglePalette = ({ seedColors }) => {
             name={c.name}
           />
         ))}
+        <PreviousPage>
+          <BackButton to={`/palette/${paletteId}`}>Go Back</BackButton>
+        </PreviousPage>
       </ShadesHolder>
       <Footer paletteName={paletteName} emoji={emoji} />
       <SnackBar

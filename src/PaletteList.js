@@ -44,7 +44,7 @@ const PaletteList = ({ palette }) => {
       <PalettesListHeader>React Palette</PalettesListHeader>
       <PalettesContainer>
         {palette.map((p) => (
-          <MiniPalette {...p} />
+          <MiniPalette key={p.id} {...p} />
         ))}
       </PalettesContainer>
     </PalettesList>

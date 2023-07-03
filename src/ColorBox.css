@@ -9,6 +9,10 @@
   margin-bottom: -4px;
 }
 
+.SinglePlatte .ColorBox {
+  height: 50%;
+}
+
 .copy-button {
   width: 100px;
   height: 30px;

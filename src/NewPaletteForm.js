@@ -72,7 +72,7 @@ const ColorBox = styled("div", {
 })({
   width: "100%",
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill,minmax(240px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill,minmax(250px, 1fr))",
   gridAutoRows: 170,
 });
 
@@ -81,7 +81,7 @@ const NewPaletteForm = () => {
 
   const [data, setData] = useState({
     open: true,
-    curColor: "peal",
+    curColor: "",
     palette: ["purple", "#D51E1E"],
   });
 
@@ -98,7 +98,9 @@ const NewPaletteForm = () => {
   };
 
   const addColor = () => {
-    setData({ ...data, palette: [...data.palette, data.curColor] });
+    if (data.curColor !== "") {
+      setData({ ...data, palette: [...data.palette, data.curColor] });
+    }
   };
 
   return (
@@ -158,8 +160,9 @@ const NewPaletteForm = () => {
           color="primary"
           style={{ backgroundColor: data.curColor }}
           onClick={addColor}
+          disabled={data.palette.length >= 20}
         >
-          Add Color
+          {data.palette.length >= 20 ? "Palette Full" : "Add Color"}
         </Button>
       </Drawer>
       <Main open={data.open}>

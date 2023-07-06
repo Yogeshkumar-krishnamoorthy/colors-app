@@ -65,27 +65,40 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const NewPaletteForm = () => {
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+
+  const [data, setData] = useState({
+    open: true,
+    curColor: "peal",
+    palette: ["purple", "#D51E1E"],
+  });
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setData({ ...data, open: true });
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setData({ ...data, open: false });
+  };
+
+  const handleColor = (color) => {
+    setData({ ...data, curColor: color.hex });
+  };
+
+  const addColor = () => {
+    setData({ ...data, palette: [...data.palette, data.curColor] });
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={data.open}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
+            sx={{ mr: 2, ...(data.open && { display: "none" }) }}
           >
             <MenuIcon />
           </IconButton>
@@ -105,7 +118,7 @@ const NewPaletteForm = () => {
         }}
         variant="persistent"
         anchor="left"
-        open={open}
+        open={data.open}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -116,7 +129,6 @@ const NewPaletteForm = () => {
             )}
           </IconButton>
         </DrawerHeader>
-        {/* color picker goes here */}
         <Divider />
         <Typography variant="h4">Design your palette</Typography>
         <div>
@@ -127,14 +139,23 @@ const NewPaletteForm = () => {
             Random Color
           </Button>
         </div>
-        <ChromePicker />
-        <Button variant="contained" color="primary">
+        <ChromePicker color={data.curColor} onChangeComplete={handleColor} />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: data.curColor }}
+          onClick={addColor}
+        >
           Add Color
         </Button>
       </Drawer>
-      <Main open={open}>
+      <Main open={data.open}>
         <DrawerHeader />
-        {/* picked colors goes here */}
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {data.palette.map((c) => (
+            <div style={{ width: 50, height: 50, backgroundColor: c }}></div>
+          ))}
+        </div>
       </Main>
     </Box>
   );

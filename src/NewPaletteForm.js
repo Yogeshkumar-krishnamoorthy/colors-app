@@ -13,13 +13,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { ChromePicker } from "react-color";
+import DraggableColorBox from "./DraggableColorBox";
 
 const drawerWidth = 300;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
+    padding: 0,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -31,6 +33,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
         duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
+      padding: 0,
     }),
   })
 );
@@ -62,6 +65,16 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+
+const ColorBox = styled("div", {
+  name: "colorbox",
+  slot: "container",
+})({
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill,minmax(240px, 1fr))",
+  gridAutoRows: 170,
+});
 
 const NewPaletteForm = () => {
   const theme = useTheme();
@@ -151,11 +164,11 @@ const NewPaletteForm = () => {
       </Drawer>
       <Main open={data.open}>
         <DrawerHeader />
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <ColorBox>
           {data.palette.map((c) => (
-            <div style={{ width: 50, height: 50, backgroundColor: c }}></div>
+            <DraggableColorBox color={c} />
           ))}
-        </div>
+        </ColorBox>
       </Main>
     </Box>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import MiniPalette from "./MiniPalette";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 
 const PalettesList = styled("div", {
   name: "palettes",
@@ -11,19 +12,32 @@ const PalettesList = styled("div", {
   backgroundColor: "blue",
 });
 
-const PalettesListHeader = styled("h1", {
+const PalettesListHeader = styled("div", {
   name: "palettes-list",
   slot: "header",
 })({
   maxWidth: 700,
-  color: "#000",
+  color: "#fff",
+  textAlign: "center",
   fontSize: "1.5rem",
   fontWeight: "600",
-  textAlign: "center",
   padding: "10px 0",
   margin: "0 auto",
   display: "flex",
   justifyContent: "space-between",
+  alignItems: "center",
+  "& h1": {
+    margin: 0,
+    fontSize: "inherit",
+    fontWeight: "inherit",
+    cursor: "default",
+  },
+  "& a": {
+    textDecoration: "none",
+    color: "inherit",
+    fontSize: "80%",
+    fontWeight: "inherit",
+  },
 });
 
 const PalettesContainer = styled("div", {
@@ -41,7 +55,10 @@ const PalettesContainer = styled("div", {
 const PaletteList = ({ palette }) => {
   return (
     <PalettesList>
-      <PalettesListHeader>React Palette</PalettesListHeader>
+      <PalettesListHeader>
+        <h1>React Colors</h1>
+        <Link to="/palette/new">Create Palette</Link>
+      </PalettesListHeader>
       <PalettesContainer>
         {palette.map((p) => (
           <MiniPalette key={p.id} {...p} />

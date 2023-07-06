@@ -9,6 +9,7 @@ import Palette from "./Palette";
 import seedColors from "./seedColors";
 import PaletteList from "./PaletteList";
 import SinglePalette from "./SinglePalette";
+import NewPaletteForm from "./NewPaletteForm";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route>
         <Route exact path="/" element={<PaletteList palette={seedColors} />} />
         <Route exact path="/palette" element={<h1>create palette</h1>} />
+        <Route exact path="/palette/new" element={<NewPaletteForm />} />
         <Route
           exact
           path="/palette/:id"

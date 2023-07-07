@@ -7,7 +7,7 @@ const Root = styled("div", {
 })({
   position: "relative",
 });
-    
+
 const ColorBoxInner = styled("div", {
   name: "colorbox",
   slot: "container",
@@ -21,11 +21,11 @@ const ColorBoxInner = styled("div", {
   alignItems: "center",
 });
 
-const DraggableColorBox = ({ color }) => {
+const DraggableColorBox = ({ name, color }) => {
   return (
     <Root style={{ backgroundColor: color }}>
       <ColorBoxInner>
-        <h6>{color}</h6>
+        <h6>{name}</h6>
       </ColorBoxInner>
     </Root>
   );

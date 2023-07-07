@@ -14,6 +14,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { ChromePicker } from "react-color";
 import DraggableColorBox from "./DraggableColorBox";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const drawerWidth = 300;
 
@@ -72,7 +73,7 @@ const ColorBox = styled("div", {
 })({
   width: "100%",
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill,minmax(250px, 1fr))",
+  gridTemplateColumns: "repeat(5,minmax(50px, 1fr))",
   gridAutoRows: 170,
 });
 
@@ -82,7 +83,8 @@ const NewPaletteForm = () => {
   const [data, setData] = useState({
     open: true,
     curColor: "",
-    palette: ["purple", "#D51E1E"],
+    palette: [],
+    newName: "",
   });
 
   const handleDrawerOpen = () => {
@@ -99,8 +101,33 @@ const NewPaletteForm = () => {
 
   const addColor = () => {
     if (data.curColor !== "") {
-      setData({ ...data, palette: [...data.palette, data.curColor] });
+      let newColor = { color: data.curColor, name: data.newName };
+      setData({ ...data, curColor: "", palette: [...data.palette, newColor] });
     }
+  };
+
+  ValidatorForm.addValidationRule("isColorNameUnique", (value) => {
+    return data.palette.length > 0
+      ? data.palette.every(
+          ({ name }) => name.toLowerCase() !== value.toLowerCase()
+        )
+      : true;
+  });
+
+  ValidatorForm.addValidationRule("isColor", (value) => {
+    return data.curColor !== "";
+  });
+
+  ValidatorForm.addValidationRule("isColorUnique", (value) => {
+    return data.palette.length > 0
+      ? data.palette.every(
+          ({ color }) => color.toLowerCase() !== data.curColor.toLowerCase()
+        )
+      : true;
+  });
+
+  const handleChange = (e) => {
+    setData({ ...data, newName: e.target.value });
   };
 
   return (
@@ -155,21 +182,39 @@ const NewPaletteForm = () => {
           </Button>
         </div>
         <ChromePicker color={data.curColor} onChangeComplete={handleColor} />
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ backgroundColor: data.curColor }}
-          onClick={addColor}
-          disabled={data.palette.length >= 20}
-        >
-          {data.palette.length >= 20 ? "Palette Full" : "Add Color"}
-        </Button>
+        <ValidatorForm onSubmit={addColor}>
+          <TextValidator
+            value={data.newName}
+            onChange={handleChange}
+            validators={[
+              "required",
+              "isColor",
+              "isColorNameUnique",
+              "isColorUnique",
+            ]}
+            errorMessages={[
+              "color name required",
+              "color required",
+              "color name taken",
+              "color taken",
+            ]}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: data.curColor }}
+            disabled={data.palette.length >= 20}
+          >
+            {data.palette.length >= 20 ? "Palette Full" : "Add Color"}
+          </Button>
+        </ValidatorForm>
       </Drawer>
       <Main open={data.open}>
         <DrawerHeader />
         <ColorBox>
           {data.palette.map((c) => (
-            <DraggableColorBox color={c} />
+            <DraggableColorBox name={c.name} color={c.color} />
           ))}
         </ColorBox>
       </Main>

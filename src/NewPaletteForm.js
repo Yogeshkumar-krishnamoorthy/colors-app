@@ -147,6 +147,8 @@ const NewPaletteForm = () => {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <Button variant="contained" color="secondary">Svae Palete</Button>
+          {/* <Button variant="contained" color="secondary"></Button> */}
         </Toolbar>
       </AppBar>
       <Drawer
